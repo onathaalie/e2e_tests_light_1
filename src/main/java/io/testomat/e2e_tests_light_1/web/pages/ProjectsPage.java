@@ -1,7 +1,6 @@
 package io.testomat.e2e_tests_light_1.web.pages;
 
 import com.codeborne.selenide.*;
-import org.jspecify.annotations.NonNull;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -50,5 +49,43 @@ public class ProjectsPage {
     public String getTotalCountOfTestCases() {
         return $("#container kbd").getText();
     }
+
+    //my personal methods
+
+    public void userCanSelectFreeProjectsInDropdown() {
+        $("#content-desktop #company_id").click();
+        SelenideElement firstOption = $("#content-desktop #company_id option:nth-of-type(1)").shouldHave(Condition.text("Free Projects"));
+        firstOption.shouldNotBe(Condition.selected);
+        firstOption.click();
+        firstOption.shouldBe(Condition.selected);
+    }
+
+    public void clickOnCreateProjectButton() {
+        $("#container [href=\"/projects/new\"]").click();
+    }
+
+    public void enterNameForANewProject() {
+        $("[name=\"project[title]\"]").setValue("My test project");
+    }
+
+    public void submitAndVerifyNewProject() {
+        $("[name=\"commit\"]").click();
+        $("#ember41 h1").shouldBe(Condition.visible);
+    }
+
+    public void openTheFirstProjectInFreeProjects() {
+        $("[title=\"my project\"] >div").click();
+        $("#ember40").shouldBe(Condition.visible);
+    }
+
+    public void createTheFirstTestSuite() {
+        $("#item-title").setValue("My first Test Suite");
+        $("button[class=\"primary-btn btn-text-and-icon btn-lg\"]").click();
+        $("#ember82 span").shouldHave(Condition.text("My first Test Suite"));
+    }
+
+    //my personal methods
+
+
 
 }

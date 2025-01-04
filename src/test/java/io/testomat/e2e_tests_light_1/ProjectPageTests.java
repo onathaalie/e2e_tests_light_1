@@ -3,6 +3,7 @@ package io.testomat.e2e_tests_light_1;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.testomat.e2e_tests_light_1.utils.StringParsers;
+import io.testomat.e2e_tests_light_1.web.pages.AnalyticsPage;
 import io.testomat.e2e_tests_light_1.web.pages.ProjectPage;
 import io.testomat.e2e_tests_light_1.web.pages.ProjectsPage;
 import io.testomat.e2e_tests_light_1.web.pages.SignInPage;
@@ -17,6 +18,7 @@ import static io.testomat.e2e_tests_light_1.utils.StringParsers.parseIntegerFrom
 public class ProjectPageTests extends BaseTest {
 
     private static final ProjectsPage projectsPage = new ProjectsPage();
+    private static final AnalyticsPage analyticsPage = new AnalyticsPage();
     private static final SignInPage signInPage = new SignInPage();
     static String username = env.get("USERNAME");
     static String password = env.get("PASSWORD");
@@ -80,22 +82,38 @@ public class ProjectPageTests extends BaseTest {
         Assertions.assertEquals(false, actual);
     }
 
+
+    // My Tests
     @Test
-    public void userCanCreateCompany() {
-        createCompany();
+    public void userCanSelectFreeProjects() {
+        projectsPage.userCanSelectFreeProjectsInDropdown();
     }
 
+    @Test
+    public void userCanFilterProjectsWithSelectAllOption() {
+        analyticsPage.navigateToAnalyticsPage();
+        analyticsPage.openProjectsFilter();
+        analyticsPage.clickOnSelectAllFilterOption();
+        analyticsPage.applyProjectsFilter();
+        analyticsPage.verifyThatFilterOptionIsSelected();
 
-    public void createCompany() {
-        $("#content-desktop h2").shouldHave(Condition.text("Projects"));
-        $("#content-desktop a:nth-of-type(2)").click();
-        $("#content-desktop ul li").shouldHave(Condition.text("Companies"));
-        $("#content-desktop button.common-btn-primary.common-btn-lg").click();
-        $("#content-desktop h2").shouldHave(Condition.text("Create Company"));
-        $("#company_title").shouldNotBe(Condition.empty);
-        $("[name = commit]").click();
-        $(".common-flash-success-right p").shouldHave(Condition.partialText("Company is created"));
     }
+
+    @Test
+    public void userCanCreateProjectInFreeProjects() {
+        projectsPage.userCanSelectFreeProjectsInDropdown();
+        projectsPage.clickOnCreateProjectButton();
+        projectsPage.enterNameForANewProject();
+        projectsPage.submitAndVerifyNewProject();
+    }
+
+    @Test
+    public void userCanCreateTheFirstTestSuiteInFreeProjects() {
+        projectsPage.userCanSelectFreeProjectsInDropdown();
+        projectsPage.openTheFirstProjectInFreeProjects();
+        projectsPage.createTheFirstTestSuite();
+    }
+
 
 
 }
