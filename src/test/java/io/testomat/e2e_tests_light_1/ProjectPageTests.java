@@ -14,9 +14,6 @@ import static io.testomat.e2e_tests_light_1.utils.StringParsers.parseIntegerFrom
 
 public class ProjectPageTests extends BaseTest {
 
-    public final ProjectPage projectPage = new ProjectPage();
-
-
 
     @BeforeEach
     void openProjectsPage() {
@@ -74,7 +71,7 @@ public class ProjectPageTests extends BaseTest {
     @Test
     public void userCanRenameProjectInFreeProjects() {
         app.projectsPage.selectFreeProjectsInProjectsDropdown().selectExistingProjectInFreeProjects();
-        projectPage.openSettingsOfTheFreeProject()
+        app.projectPage.openSettingsOfTheFreeProject()
                 .navigateToProjectInfoSettings()
                 .renameExistingProjectInFreeProjects("Renamed project")
                 .saveChangesOfProjectInfoInFreeProjects()
@@ -82,17 +79,6 @@ public class ProjectPageTests extends BaseTest {
     }
 
     // My Tests
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

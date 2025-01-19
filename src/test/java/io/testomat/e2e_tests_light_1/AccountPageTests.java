@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 public class AccountPageTests extends BaseTest {
 
-    private static final AccountPage accountPage = new AccountPage();
+
 
 
     // My Tests
     @Test
     public void userCanChangeThemeToDark() {
-        accountPage.navigateToAccountPage()
+        app.accountPage.navigateToAccountPage()
                 .openThemeDropdown()
                 .verifyThatLightThemeIsSelected()
                 .changeThemeToDark()

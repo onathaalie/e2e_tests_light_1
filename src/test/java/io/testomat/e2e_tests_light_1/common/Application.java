@@ -8,4 +8,7 @@ public class Application {
     public final ProjectPage projectPage = new ProjectPage();
     public final ProjectsPage projectsPage = new ProjectsPage();
     public final ReadmePage readmePage = new ReadmePage();
+    public final AccountPage accountPage = new AccountPage();
+    public final AnalyticsPage analyticsPage = new AnalyticsPage();
+
 }

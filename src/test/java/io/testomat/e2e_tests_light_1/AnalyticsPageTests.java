@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class AnalyticsPageTests extends BaseTest {
 
-    private static final AnalyticsPage analyticsPage = new AnalyticsPage();
+
 
     // My Tests
     @Test
     public void userCanFilterProjectsWithSelectAllOption() {
-        analyticsPage.navigateToAnalyticsPage()
+        app.analyticsPage.navigateToAnalyticsPage()
                 .openProjectsFilter()
                 .clickOnSelectAllFilterOption()
                 .applyProjectsFilter()
