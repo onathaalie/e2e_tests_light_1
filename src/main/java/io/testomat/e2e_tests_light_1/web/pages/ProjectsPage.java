@@ -14,16 +14,18 @@ public class ProjectsPage {
         Selenide.open("");
     }
 
-    public void isLoaded() {
+    public ProjectsPage isLoaded() {
         searchInput.shouldBe(Condition.visible);
+        return this;
     }
 
     public void signInSuccess() {
         $("#container .common-flash-success").shouldBe(Condition.visible);
     }
 
-    public void searchForProject(String targetProjectName) {
+    public ProjectsPage searchForProject(String targetProjectName) {
         $("#search").setValue(targetProjectName);
+        return this;
     }
 
     public void selectProject(String targetProjectName) {
@@ -50,42 +52,39 @@ public class ProjectsPage {
         return $("#container kbd").getText();
     }
 
-    //my personal methods
 
-    public void userCanSelectFreeProjectsInDropdown() {
-        $("#content-desktop #company_id").click();
-        SelenideElement firstOption = $("#content-desktop #company_id option:nth-of-type(1)").shouldHave(Condition.text("Free Projects"));
-        firstOption.shouldNotBe(Condition.selected);
-        firstOption.click();
-        firstOption.shouldBe(Condition.selected);
+
+    // my methods
+    public void selectFreeProjectsInProjectsDropdown() {
+        $("[name=\"company[id]\"]").click();
+        $("[name=\"company[id]\"] option:first-of-type").shouldNotBe(Condition.selected).click();
     }
 
-    public void clickOnCreateProjectButton() {
-        $("#container [href=\"/projects/new\"]").click();
+    public void selectExistingProjectInFreeProjects() {
+        $("[href=\"/projects/my-test-project-71bdb/\"] div").click();
     }
 
-    public void enterNameForANewProject() {
-        $("[name=\"project[title]\"]").setValue("My test project");
+    public void openSettingsOfTheFreeProject() {
+        $("[class=\"mainnav-menu-body\"] ul li:nth-of-type(10)").click();
     }
 
-    public void submitAndVerifyNewProject() {
-        $("[name=\"commit\"]").click();
-        $("#ember41 h1").shouldBe(Condition.visible);
+    public void navigateToProjectInfoSettings() {
+        $("[class=\"subnav-menu-list-wrapper\"] ul li:nth-of-type(1)").click();
     }
 
-    public void openTheFirstProjectInFreeProjects() {
-        $("[title=\"my project\"] >div").click();
-        $("#ember40").shouldBe(Condition.visible);
+    public void renameExistingProjectInFreeProjects(String newProjectName) {
+        $("#project-title").shouldNotBe(Condition.empty).setValue(newProjectName);
     }
 
-    public void createTheFirstTestSuite() {
-        $("#item-title").setValue("My first Test Suite");
-        $("button[class=\"primary-btn btn-text-and-icon btn-lg\"]").click();
-        $("#ember82 span").shouldHave(Condition.text("My first Test Suite"));
+    public void saveChangesOfProjectInfoInFreeProjects() {
+        $("button.primary-btn.btn-text-and-icon.btn-lg").click();
     }
 
-    //my personal methods
+    public void verifyThatProjectNameIsChanged(String newProjectName) {
+        $("#project-title").shouldHave(Condition.value(newProjectName));
+    }
 
+    // my methods
 
 
 }

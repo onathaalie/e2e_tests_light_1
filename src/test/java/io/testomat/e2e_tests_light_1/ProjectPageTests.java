@@ -3,12 +3,8 @@ package io.testomat.e2e_tests_light_1;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.testomat.e2e_tests_light_1.utils.StringParsers;
-import io.testomat.e2e_tests_light_1.web.pages.AnalyticsPage;
-import io.testomat.e2e_tests_light_1.web.pages.ProjectPage;
-import io.testomat.e2e_tests_light_1.web.pages.ProjectsPage;
-import io.testomat.e2e_tests_light_1.web.pages.SignInPage;
+import io.testomat.e2e_tests_light_1.web.pages.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,42 +13,33 @@ import static io.testomat.e2e_tests_light_1.utils.StringParsers.parseIntegerFrom
 
 public class ProjectPageTests extends BaseTest {
 
-    private static final ProjectsPage projectsPage = new ProjectsPage();
-    private static final AnalyticsPage analyticsPage = new AnalyticsPage();
-    private static final SignInPage signInPage = new SignInPage();
-    static String username = env.get("USERNAME");
-    static String password = env.get("PASSWORD");
-    private final ProjectPage projectPage = new ProjectPage();
-    String targetProjectName = "Manufacture light";
 
-    @BeforeAll
-    static void openTestomatAndLogin() {
-        signInPage.open();
-        signInPage.loginUser(username, password);
-        projectsPage.signInSuccess();
-    }
+    private static final AnalyticsPage analyticsPage = new AnalyticsPage();
+    private static final AccountPage accountPage = new AccountPage();
+
+
 
     @BeforeEach
     void openProjectsPage() {
-        projectsPage.open();
-        projectsPage.isLoaded();
+        app.projectsPage.open();
+        app.projectsPage.isLoaded();
     }
 
     @Test
     public void userCanFindProjectWithTests() {
-        projectsPage.searchForProject(targetProjectName);
-        projectsPage.selectProject(targetProjectName);
-        projectPage.isLoaded(targetProjectName);
+        app.projectsPage.searchForProject(targetProjectName);
+        app.projectsPage.selectProject(targetProjectName);
+        app.projectPage.isLoaded(targetProjectName);
     }
 
     @Test
     public void anotherTest() {
-        projectsPage.searchForProject(targetProjectName);
-        SelenideElement targetProject = projectsPage.countOfProjectsShouldBeEqualTo(1).first();
-        projectsPage.countOfTestCasesShouldBeEqualTo(targetProject, 0);
+        app.projectsPage.searchForProject(targetProjectName);
+        SelenideElement targetProject = app.projectsPage.countOfProjectsShouldBeEqualTo(1).first();
+        app.projectsPage.countOfTestCasesShouldBeEqualTo(targetProject, 0);
 
-        projectsPage.totalCountOfProjectsIsVisible();
-        var totalProjects = projectsPage.getTotalCountOfTestCases();
+        app.projectsPage.totalCountOfProjectsIsVisible();
+        var totalProjects = app.projectsPage.getTotalCountOfTestCases();
         var actualCountOfTotalTests = parseIntegerFromString(totalProjects);
         Assertions.assertTrue(actualCountOfTotalTests > 100);
 
@@ -84,10 +71,6 @@ public class ProjectPageTests extends BaseTest {
 
 
     // My Tests
-    @Test
-    public void userCanSelectFreeProjects() {
-        projectsPage.userCanSelectFreeProjectsInDropdown();
-    }
 
     @Test
     public void userCanFilterProjectsWithSelectAllOption() {
@@ -95,24 +78,42 @@ public class ProjectPageTests extends BaseTest {
         analyticsPage.openProjectsFilter();
         analyticsPage.clickOnSelectAllFilterOption();
         analyticsPage.applyProjectsFilter();
+        analyticsPage.openProjectsFilter();
         analyticsPage.verifyThatFilterOptionIsSelected();
 
     }
 
     @Test
-    public void userCanCreateProjectInFreeProjects() {
-        projectsPage.userCanSelectFreeProjectsInDropdown();
-        projectsPage.clickOnCreateProjectButton();
-        projectsPage.enterNameForANewProject();
-        projectsPage.submitAndVerifyNewProject();
+    public void userCanChangeThemeToDark() {
+        accountPage.navigateToAccountPage();
+        accountPage.openThemeDropdown();
+        accountPage.verifyThatLightThemeIsSelected();
+        accountPage.changeThemeToDark();
+        accountPage.saveChangesOfUserAccountUpdate();
+        accountPage.verifyThatDarkThemeIsSelected();
     }
 
     @Test
-    public void userCanCreateTheFirstTestSuiteInFreeProjects() {
-        projectsPage.userCanSelectFreeProjectsInDropdown();
-        projectsPage.openTheFirstProjectInFreeProjects();
-        projectsPage.createTheFirstTestSuite();
+    public void userCanRenameProjectInFreeProjects() {
+        app.projectsPage.selectFreeProjectsInProjectsDropdown();
+        app.projectsPage.selectExistingProjectInFreeProjects();
+        app.projectsPage.openSettingsOfTheFreeProject();
+        app.projectsPage.navigateToProjectInfoSettings();
+        app.projectsPage.renameExistingProjectInFreeProjects("Renamed project");
+        app.projectsPage.saveChangesOfProjectInfoInFreeProjects();
+        app.projectsPage.verifyThatProjectNameIsChanged("Renamed project");
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

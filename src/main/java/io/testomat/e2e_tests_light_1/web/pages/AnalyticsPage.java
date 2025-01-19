@@ -11,12 +11,12 @@ public class AnalyticsPage {
     //my personal methods
 
     public void navigateToAnalyticsPage() {
-        $("#content-desktop .current +a +a").click();
+        $("[href=\"/analytics\"]").click();
         $("#content-desktop h2").shouldBe(Condition.visible);
     }
 
     public void openProjectsFilter() {
-        $("button[onclick=\"toggleModal('projectsSelectModal')\"]\n").click();
+        $("button[onclick=\"toggleModal('projectsSelectModal')\"]").click();
     }
 
     public void clickOnSelectAllFilterOption() {
@@ -28,7 +28,6 @@ public class AnalyticsPage {
     }
 
     public void verifyThatFilterOptionIsSelected() {
-        openProjectsFilter();
         SelenideElement booksAndMoviesFilter = $("#projectsSelectModal [value=\"books-movies\"]").shouldBe(Condition.checked);
     }
 
