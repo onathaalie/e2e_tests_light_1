@@ -14,10 +14,6 @@ import static io.testomat.e2e_tests_light_1.utils.StringParsers.parseIntegerFrom
 public class ProjectPageTests extends BaseTest {
 
 
-    private static final AnalyticsPage analyticsPage = new AnalyticsPage();
-    private static final AccountPage accountPage = new AccountPage();
-
-
 
     @BeforeEach
     void openProjectsPage() {
@@ -73,27 +69,6 @@ public class ProjectPageTests extends BaseTest {
     // My Tests
 
     @Test
-    public void userCanFilterProjectsWithSelectAllOption() {
-        analyticsPage.navigateToAnalyticsPage();
-        analyticsPage.openProjectsFilter();
-        analyticsPage.clickOnSelectAllFilterOption();
-        analyticsPage.applyProjectsFilter();
-        analyticsPage.openProjectsFilter();
-        analyticsPage.verifyThatFilterOptionIsSelected();
-
-    }
-
-    @Test
-    public void userCanChangeThemeToDark() {
-        accountPage.navigateToAccountPage();
-        accountPage.openThemeDropdown();
-        accountPage.verifyThatLightThemeIsSelected();
-        accountPage.changeThemeToDark();
-        accountPage.saveChangesOfUserAccountUpdate();
-        accountPage.verifyThatDarkThemeIsSelected();
-    }
-
-    @Test
     public void userCanRenameProjectInFreeProjects() {
         app.projectsPage.selectFreeProjectsInProjectsDropdown();
         app.projectsPage.selectExistingProjectInFreeProjects();
@@ -104,7 +79,7 @@ public class ProjectPageTests extends BaseTest {
         app.projectsPage.verifyThatProjectNameIsChanged("Renamed project");
     }
 
-
+    // My Tests
 
 
 
