@@ -55,34 +55,18 @@ public class ProjectsPage {
 
 
     // my methods
-    public void selectFreeProjectsInProjectsDropdown() {
+    public ProjectsPage selectFreeProjectsInProjectsDropdown() {
         $("[name=\"company[id]\"]").click();
         $("[name=\"company[id]\"] option:first-of-type").shouldNotBe(Condition.selected).click();
+        return this;
     }
 
-    public void selectExistingProjectInFreeProjects() {
+    public ProjectsPage selectExistingProjectInFreeProjects() {
         $("[href=\"/projects/my-test-project-71bdb/\"] div").click();
+        return this;
     }
 
-    public void openSettingsOfTheFreeProject() {
-        $("[class=\"mainnav-menu-body\"] ul li:nth-of-type(10)").click();
-    }
 
-    public void navigateToProjectInfoSettings() {
-        $("[class=\"subnav-menu-list-wrapper\"] ul li:nth-of-type(1)").click();
-    }
-
-    public void renameExistingProjectInFreeProjects(String newProjectName) {
-        $("#project-title").shouldNotBe(Condition.empty).setValue(newProjectName);
-    }
-
-    public void saveChangesOfProjectInfoInFreeProjects() {
-        $("button.primary-btn.btn-text-and-icon.btn-lg").click();
-    }
-
-    public void verifyThatProjectNameIsChanged(String newProjectName) {
-        $("#project-title").shouldHave(Condition.value(newProjectName));
-    }
 
     // my methods
 

@@ -12,12 +12,12 @@ public class AnalyticsPageTests extends BaseTest {
     // My Tests
     @Test
     public void userCanFilterProjectsWithSelectAllOption() {
-        analyticsPage.navigateToAnalyticsPage();
-        analyticsPage.openProjectsFilter();
-        analyticsPage.clickOnSelectAllFilterOption();
-        analyticsPage.applyProjectsFilter();
-        analyticsPage.openProjectsFilter();
-        analyticsPage.verifyThatFilterOptionIsSelected();
+        analyticsPage.navigateToAnalyticsPage()
+                .openProjectsFilter()
+                .clickOnSelectAllFilterOption()
+                .applyProjectsFilter()
+                .openProjectsFilter()
+                .verifyThatFilterOptionIsSelected();
     }
     // My Tests
 }

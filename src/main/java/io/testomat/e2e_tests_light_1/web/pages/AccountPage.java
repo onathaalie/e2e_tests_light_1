@@ -6,30 +6,36 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class AccountPage {
 
-    public void navigateToAccountPage() {
+    public AccountPage navigateToAccountPage() {
         $("#user-menu-button").click();
         $("[href=\"/account\"]").click();
+        return this;
     }
 
-    public void openThemeDropdown() {
+    public AccountPage openThemeDropdown() {
         $("#user_theme").click();
+        return this;
     }
 
-    public void verifyThatLightThemeIsSelected() {
+    public AccountPage verifyThatLightThemeIsSelected() {
         $("[value=\"light\"]").shouldBe(Condition.selected);
+        return this;
     }
 
-    public void changeThemeToDark() {
+    public AccountPage changeThemeToDark() {
         $("[value=\"dark\"]").shouldNotBe(Condition.selected).click();
         $("[value=\"Save\"]").click();
+        return this;
     }
 
-    public void saveChangesOfUserAccountUpdate() {
+    public AccountPage saveChangesOfUserAccountUpdate() {
         $("#user_theme").click();
+        return this;
     }
 
-    public void verifyThatDarkThemeIsSelected() {
+    public AccountPage verifyThatDarkThemeIsSelected() {
         $("[value=\"dark\"]").shouldBe(Condition.selected);
+        return this;
     }
 
 }

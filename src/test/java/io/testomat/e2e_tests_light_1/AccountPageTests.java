@@ -11,12 +11,12 @@ public class AccountPageTests extends BaseTest {
     // My Tests
     @Test
     public void userCanChangeThemeToDark() {
-        accountPage.navigateToAccountPage();
-        accountPage.openThemeDropdown();
-        accountPage.verifyThatLightThemeIsSelected();
-        accountPage.changeThemeToDark();
-        accountPage.saveChangesOfUserAccountUpdate();
-        accountPage.verifyThatDarkThemeIsSelected();
+        accountPage.navigateToAccountPage()
+                .openThemeDropdown()
+                .verifyThatLightThemeIsSelected()
+                .changeThemeToDark()
+                .saveChangesOfUserAccountUpdate()
+                .verifyThatDarkThemeIsSelected();
     }
     // My Tests
 }

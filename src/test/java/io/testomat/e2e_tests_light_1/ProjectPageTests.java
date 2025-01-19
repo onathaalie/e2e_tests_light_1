@@ -2,6 +2,7 @@ package io.testomat.e2e_tests_light_1;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.testomat.e2e_tests_light_1.common.Application;
 import io.testomat.e2e_tests_light_1.utils.StringParsers;
 import io.testomat.e2e_tests_light_1.web.pages.*;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static io.testomat.e2e_tests_light_1.utils.StringParsers.parseIntegerFromString;
 
 public class ProjectPageTests extends BaseTest {
+
+    public final ProjectPage projectPage = new ProjectPage();
 
 
 
@@ -70,13 +73,12 @@ public class ProjectPageTests extends BaseTest {
 
     @Test
     public void userCanRenameProjectInFreeProjects() {
-        app.projectsPage.selectFreeProjectsInProjectsDropdown();
-        app.projectsPage.selectExistingProjectInFreeProjects();
-        app.projectsPage.openSettingsOfTheFreeProject();
-        app.projectsPage.navigateToProjectInfoSettings();
-        app.projectsPage.renameExistingProjectInFreeProjects("Renamed project");
-        app.projectsPage.saveChangesOfProjectInfoInFreeProjects();
-        app.projectsPage.verifyThatProjectNameIsChanged("Renamed project");
+        app.projectsPage.selectFreeProjectsInProjectsDropdown().selectExistingProjectInFreeProjects();
+        projectPage.openSettingsOfTheFreeProject()
+                .navigateToProjectInfoSettings()
+                .renameExistingProjectInFreeProjects("Renamed project")
+                .saveChangesOfProjectInfoInFreeProjects()
+                .verifyThatProjectNameIsChanged("Renamed project");
     }
 
     // My Tests

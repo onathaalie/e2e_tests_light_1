@@ -10,25 +10,30 @@ public class AnalyticsPage {
 
     //my personal methods
 
-    public void navigateToAnalyticsPage() {
+    public AnalyticsPage navigateToAnalyticsPage() {
         $("[href=\"/analytics\"]").click();
         $("#content-desktop h2").shouldBe(Condition.visible);
+        return this;
     }
 
-    public void openProjectsFilter() {
+    public AnalyticsPage openProjectsFilter() {
         $("button[onclick=\"toggleModal('projectsSelectModal')\"]").click();
+        return this;
     }
 
-    public void clickOnSelectAllFilterOption() {
+    public AnalyticsPage clickOnSelectAllFilterOption() {
         $("#projectsSelectModal a").click();
+        return this;
     }
 
-    public void applyProjectsFilter() {
+    public AnalyticsPage applyProjectsFilter() {
         $("#projectsSelectModal button[type=\"submit\"]").click();
+        return this;
     }
 
-    public void verifyThatFilterOptionIsSelected() {
+    public AnalyticsPage verifyThatFilterOptionIsSelected() {
         SelenideElement booksAndMoviesFilter = $("#projectsSelectModal [value=\"books-movies\"]").shouldBe(Condition.checked);
+        return this;
     }
 
     //my personal methods
