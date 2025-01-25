@@ -7,6 +7,7 @@ public class StringParsers {
     @NotNull
     public static Integer parseIntegerFromString(String targetText) {
         String digitText = targetText.replaceAll("\\D+", "");
+
         return Integer.parseInt(digitText);
         // is designed to extract all numeric digits from a given string and convert them into an Integer
     }

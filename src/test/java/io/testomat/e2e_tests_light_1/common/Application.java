@@ -10,5 +10,6 @@ public class Application {
     public final ReadmePage readmePage = new ReadmePage();
     public final AccountPage accountPage = new AccountPage();
     public final AnalyticsPage analyticsPage = new AnalyticsPage();
+    public final CompaniesPage companiesPage = new CompaniesPage();
 
 }
